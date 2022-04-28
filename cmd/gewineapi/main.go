@@ -3,13 +3,13 @@ package main
 import (
 	"net/http"
 
-	"github.com/trkizaki/gewineapi/controller"
-	"github.com/trkizaki/gewineapi/model/repository"
+	"github.com/TRkizaki/gewineapi/controller"
+	"github.com/TRkizaki/gewineapi/model/repository"
 )
 
-var tr = repository.NewWinelistRepository()
-var tc = controller.NewWinelistController(tr)
-var ro = controller.NewRouter(tc)
+var wr = repository.NewWinelistRepository()
+var wc = controller.NewWinelistController(wr)
+var ro = controller.NewRouter(wc)
 
 func main() {
 	server := http.Server{

@@ -11,24 +11,24 @@ type Router interface {
 
 // private Router struct
 type router struct {
-	tc WinelistController
+	wc WinelistController
 }
 
 // Router constructor. The argument passed WinelistController,return Router struct pointer
 func NewRouter(tc WinelistController) Router {
-	return &router{tc}
+	return &router{wc}
 }
 
 func (ro *router) HandleWinelistsRequest(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
-		ro.tc.GetWinelists(w, r)
+		ro.wc.GetWinelists(w, r)
 	case "POST":
-		ro.tc.PostWinelists(w, r)
+		ro.wc.PostWinelists(w, r)
 	case "PUT":
-		ro.tc.PutWinelist(w, r)
+		ro.wc.PutWinelist(w, r)
 	case "DELETE":
-		ro.tc.DeleteWinelist(w, r)
+		ro.wc.DeleteWinelist(w, r)
 	default:
 		w.WriteHeader(405)
 	}
