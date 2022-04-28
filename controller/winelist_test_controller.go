@@ -76,7 +76,7 @@ func TestGetWinelists_Error(t *testing.T) {
 }
 
 func TestPostWinelist_OK(t *testing.T) {
-	json := strings.NewReader(`{"title":"test-title","content":"test-content"}`)
+	json := strings.NewReader(`{"title":"test-title","brand":"test-brand"}`)
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/winelists/", json)
 
@@ -92,7 +92,7 @@ func TestPostWinelist_OK(t *testing.T) {
 }
 
 func TestPostWinelist_Error(t *testing.T) {
-	json := strings.NewReader(`{"title":"test-title","contents":"test-content"}`)
+	json := strings.NewReader(`{"title":"test-title","brands":"test-brand"}`)
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/winelists/", json)
 
@@ -108,7 +108,7 @@ func TestPostWinelist_Error(t *testing.T) {
 }
 
 func TestPutWInelist_OK(t *testing.T) {
-	json := strings.NewReader(`{"title":"test-title","contents":"test-content"}`)
+	json := strings.NewReader(`{"title":"test-title","brands":"test-brand"}`)
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("PUT", "/winelists/2", json)
 
@@ -133,7 +133,7 @@ func TestPutWinelist_InvalidPath(t *testing.T) {
 }
 
 func TestPutWinelist_Error(t *testing.T) {
-	json := strings.NewReader(`{"title":"test-title","contents":"test-content"}`)
+	json := strings.NewReader(`{"title":"test-title","brands":"test-brand"}`)
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("PUT", "/winelists/2", json)
 
