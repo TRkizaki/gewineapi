@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-var Db *sql.DB
+var Db *sql.DB //This is your database handle.
 
 func init() {
 	var err error

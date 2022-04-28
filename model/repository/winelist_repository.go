@@ -25,7 +25,7 @@ func NewWinelistRepository() WinelistRepository {
 func (wr *winelistRepository) GetWinelists() (winelists []entity.WinelistEntity, err error) {
 	winelists = []entity.WinelistEntity{}
 	rows, err := Db.
-		Query("SELECT id, title, content FROM winelist ORDER BY id DESC")
+		Query("SELECT id, title, brand, price FROM winelist ORDER BY id DESC")
 	if err != nil {
 		log.Print(err)
 		return
