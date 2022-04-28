@@ -22,9 +22,9 @@ func NewRouter(tc WinelistController) Router {
 func (ro *router) HandleWinelistsRequest(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
-		ro.wc.GetWinelists(w, r)
+		ro.wc.GetWinelist(w, r)
 	case "POST":
-		ro.wc.PostWinelists(w, r)
+		ro.wc.PostWinelist(w, r)
 	case "PUT":
 		ro.wc.PutWinelist(w, r)
 	case "DELETE":

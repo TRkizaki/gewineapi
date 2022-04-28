@@ -1,6 +1,6 @@
 package entity
 
-type TodoEntity struct {
+type WinelistEntity struct {
 	Id      int
 	Title   string
 	Brand   string

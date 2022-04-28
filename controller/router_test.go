@@ -19,7 +19,7 @@ func TestMain(m *testing.M) {
 }
 
 func setUp() {
-	target := NewRouter(&test.MockWInelistController{})
+	target := NewRouter(&test.MockWinelistController{})
 	mux = http.NewServeMux()
 	mux.HandleFunc("/winelists/", target.HandleWinelistsRequest)
 
@@ -37,7 +37,7 @@ func TestGetWinelists(t *testing.T) {
 }
 
 func TestPostWinelist(t *testing.T) {
-	json := strings.NewReader(`{"title":"test-title","content":"test-content"}`)
+	json := strings.NewReader(`{"title":"test-title","Brand":"test-brand","Price":"test-price"}`)
 	r, _ := http.NewRequest("POST", "/winelists/", json)
 	w := httptest.NewRecorder()
 
@@ -49,8 +49,8 @@ func TestPostWinelist(t *testing.T) {
 }
 
 func TestPutWinelist(t *testing.T) {
-	json := strings.NewReader(`{"title":"test-title","contents":"test-content"}`)
-	r, _ := http.NewRequest("PUT", "/todos/2", json)
+	json := strings.NewReader(`{"title":"test-title","Brand":"test-brand","Price":"test-price"}`)
+	r, _ := http.NewRequest("PUT", "/winelists/2", json)
 	w := httptest.NewRecorder()
 
 	mux.ServeHTTP(w, r)

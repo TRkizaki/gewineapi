@@ -26,7 +26,7 @@ func NewWinelistController(wr repository.WinelistRepository) WinelistController 
 	return &winelistController{wr}
 }
 
-func (wc *winelistController) GetTodos(w http.ResponseWriter, r *http.Request) {
+func (wc *winelistController) GetWinelists(w http.ResponseWriter, r *http.Request) {
 	winelists, err := wc.wr.GetWinelists()
 	if err != nil {
 		w.WriteHeader(500)
@@ -35,7 +35,7 @@ func (wc *winelistController) GetTodos(w http.ResponseWriter, r *http.Request) {
 
 	var winelistResponses []dto.WinelistResponse
 	for _, v := range winelists {
-		winelistResponses = append(winelistResponses, dto.WinelistResponse{Id: v.Id, Title: v.Title, Content: v.Content})
+		winelistResponses = append(winelistResponses, dto.WinelistResponse{Id: v.Id, Title: v.Title, Brand: v.Brand, Price: v.Price})
 	}
 
 	var winelistsResponse dto.WinelistsResponse
@@ -47,14 +47,14 @@ func (wc *winelistController) GetTodos(w http.ResponseWriter, r *http.Request) {
 	w.Write(output)
 }
 
-func (wc *winelistController) PostTodo(w http.ResponseWriter, r *http.Request) {
+func (wc *winelistController) PostWinelist(w http.ResponseWriter, r *http.Request) {
 	body := make([]byte, r.ContentLength)
 	r.Body.Read(body)
 	var winelistRequest dto.WinelistRequest
 	json.Unmarshal(body, &winelistRequest)
 
-	winelist := entity.WinelistEntity{Title: winelistRequest.Title, Brand: winelistRequest.Brand}
-	id, err := wc.wr.InsertTodo(winelist)
+	winelist := entity.WinelistEntity{Title: winelistRequest.Title, Brand: winelistRequest.Brand, Price: winelistRequest.Price}
+	id, err := wc.wr.InsertWinelist(winelist)
 	if err != nil {
 		w.WriteHeader(500)
 		return
@@ -64,7 +64,7 @@ func (wc *winelistController) PostTodo(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(201)
 }
 
-func (tc *winelistController) PutTodo(w http.ResponseWriter, r *http.Request) {
+func (tc *winelistController) PutWinelist(w http.ResponseWriter, r *http.Request) {
 	winelistId, err := strconv.Atoi(path.Base(r.URL.Path))
 	if err != nil {
 		w.WriteHeader(400)
@@ -76,7 +76,7 @@ func (tc *winelistController) PutTodo(w http.ResponseWriter, r *http.Request) {
 	var winelistRequest dto.WinelistRequest
 	json.Unmarshal(body, &winelistRequest)
 
-	winelist := entity.WinelistEntity{Id: winelistId, Title: winelistRequest.Title, Brand: winelistRequest.Brand}
+	winelist := entity.WinelistEntity{Id: winelistId, Title: winelistRequest.Title, Brand: winelistRequest.Brand, Price: winelistRequest.Price}
 	err = wc.wr.UpdateWinelist(winelist)
 	if err != nil {
 		w.WriteHeader(500)
