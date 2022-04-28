@@ -1,0 +1,21 @@
+version: '2'
+services:
+  db:
+    image: gewineapi-db
+    container_name: gewineapi-db
+    build: db
+    environment:
+      MYSQL_ROOT_PASSWORD: winelist-password
+      TZ: "UTC"
+    ports:
+      - "127.0.0.1:3306:3306"
+  api-server:
+    image: gewineapi-server
+    container_name: gewineapi-server
+    build:
+      context: ../
+      dockerfile: ./build/gewineapi/Dockerfile
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - db
