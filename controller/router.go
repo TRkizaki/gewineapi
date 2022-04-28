@@ -4,17 +4,17 @@ import (
 	"net/http"
 )
 
-// 外部パッケージ用public interface
+//  public interface for Extrinsics package
 type Router interface {
 	HandleWinelistsRequest(w http.ResponseWriter, r *http.Request)
 }
 
-// 非公開のRouter struct
+// private Router struct
 type router struct {
 	tc WinelistController
 }
 
-// Routerのconstructor。argumentにWinelistControllerを受け取り、Router structのpointerをreturnする。
+// Router constructor. The argument passed WinelistController,return Router struct pointer
 func NewRouter(tc WinelistController) Router {
 	return &router{tc}
 }
