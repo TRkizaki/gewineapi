@@ -8,8 +8,6 @@ RUN go mod download
 COPY ../../  ./
 
 ARG CGO_ENABLED=0
-ARG GOOS=linux
-ARG GOARCH=amd64
 RUN go build -ldflags '-s -w' ./cmd/gewineapi
 
 FROM alpine

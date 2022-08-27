@@ -3,9 +3,11 @@ package repository
 import (
 	"log"
 
+	"github.com/TRKizaki/gewineapi/model/entity"
+
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/TRKizaki/gewineapi/model/entity"
+	
 )
 
 type WinelistRepository interface {
